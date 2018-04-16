@@ -9,4 +9,5 @@
     var vasync = require('vasync');
     var VError = require('verror');
 - spec error handling for modules?
-
+- where this merges with eng.git and RFDs for updated Joyent Eng best
+  practices is muddy
