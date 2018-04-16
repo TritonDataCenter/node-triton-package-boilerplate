@@ -1,0 +1,9 @@
+/node_modules
+/tmp
+/examples
+/tools
+/Makefile
+/TODO.txt
+/test
+/*-*.tgz
+/npm-debug.log
