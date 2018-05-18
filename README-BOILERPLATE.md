@@ -91,4 +91,11 @@ TODO: document usage and updating (manual) of eng.git Makefiles.
 
 ## Testing
 
-TODO(chrisb): fill this out
+Small unit tests are the bricks that allow sturdy structures of maintainable
+code to be built.  `test/unit` should mimic the structure of the main directory
+of code, with tests for most modules, objects, functions added as they grow.
+
+The hope is to eventually have a Joyent and JavaScript specific document along
+the lines of: <https://automated-testing-playbook.18f.gov/> Until then the general
+guidance there applies.
+
