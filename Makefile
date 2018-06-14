@@ -32,7 +32,7 @@ include ./tools/mk/Makefile.node_modules.defs
 
 NPM = npm
 NODE = node
-TEST_UNIT_JOBS = 4
+TEST_UNIT_JOBS ?= 4
 BUILD = $(TOP)/build
 CLEAN_FILES += $(BUILD)
 
