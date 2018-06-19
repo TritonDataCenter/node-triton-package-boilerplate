@@ -8,19 +8,53 @@
 # Copyright (c) 2018, Joyent, Inc.
 #
 
+
+#
+# Tools
+#
+
+TAP := ./node_modules/.bin/tap
+
+#
+# Files
+#
+
 JS_FILES := $(shell find lib -name '*.js')
 ESLINT_FILES := $(JS_FILES)
-CLEAN_FILES += ./node_modules
 
 # BOILERPLATE: We use (manual) copies of Makefile includes from joyent/eng.git.
 include ./tools/mk/Makefile.defs
+include ./tools/mk/Makefile.node_modules.defs
+
+#
+# Variables
+#
+
+NPM = npm
+NODE = node
+TEST_UNIT_JOBS ?= 4
+BUILD = $(TOP)/build
+CLEAN_FILES += $(BUILD)
 
 #
 # Targets
 #
 .PHONY: all
-all:
-	npm install
+all: $(STAMP_NODE_MODULES)
+
+$(TAP): $(STAMP_NODE_MODULES)
+
+$(BUILD):
+	mkdir $@
+
+.PHONY: test-unit
+test-unit: | $(TAP) $(STAMP_NODE_MODULES) $(BUILD)
+	$(TAP) --jobs=$(TEST_UNIT_JOBS) --output-file=$(BUILD)/test.unit.tap test/unit/**/*.test.js
+
+.PHONY: test-coverage-unit
+test-coverage-unit: | $(TAP) $(STAMP_NODE_MODULES) $(BUILD)
+	$(TAP) --jobs=$(TEST_UNIT_JOBS) --output-file=$(BUILD)/test.unit.tap --coverage \
+	test/unit/**/*.test.js
 
 check:: check-version
 
@@ -61,3 +95,4 @@ git-hooks:
 
 include ./tools/mk/Makefile.deps
 include ./tools/mk/Makefile.targ
+include ./tools/mk/Makefile.node_modules.targ
