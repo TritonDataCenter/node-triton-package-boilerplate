@@ -23,26 +23,16 @@ JS_FILES := $(shell find lib -name '*.js')
 ESLINT_FILES := $(JS_FILES)
 
 # BOILERPLATE: We use (manual) copies of Makefile includes from joyent/eng.git.
-ifeq ($(shell uname -s),SunOS)
-	NODE_PREBUILT_VERSION =	v6.17.0
-	NODE_PREBUILT_TAG =	zone64
-	NODE_PREBUILT_IMAGE = c2c31b00-1d60-11e9-9a77-ff9f06554b0f
-endif
 
 include ./tools/mk/Makefile.defs
-ifeq ($(shell uname -s),SunOS)
-	include ./tools/mk/Makefile.node_prebuilt.defs
-else
-	NODE := node
-	NPM := $(shell which npm)
-	NPM_EXEC= $(NPM)
-endif
 include ./tools/mk/Makefile.node_modules.defs
 
 #
 # Variables
 #
 
+NPM = npm
+NODE = node
 TEST_UNIT_JOBS ?= 4
 BUILD = $(TOP)/build
 CLEAN_FILES += $(BUILD)
@@ -105,8 +95,5 @@ git-hooks:
 	ln -sf ../../tools/pre-commit.sh .git/hooks/pre-commit
 
 include ./tools/mk/Makefile.deps
-ifeq ($(shell uname -s),SunOS)
-	include ./tools/mk/Makefile.node_prebuilt.targ
-endif
 include ./tools/mk/Makefile.targ
 include ./tools/mk/Makefile.node_modules.targ
