@@ -1,7 +1,6 @@
 - first pass
 - `rg TODO`
 - there is a bug in `make fmt` after first checkout (see `g why` to repro)
-- (chrisb) test story
 - all things in my triton-service.md notes 
 - should we specify usage and preferred modules for some things?
     var assert = require('assert-plus');
@@ -9,5 +8,3 @@
     var vasync = require('vasync');
     var VError = require('verror');
 - spec error handling for modules?
-- where this merges with eng.git and RFDs for updated Joyent Eng best
-  practices is muddy

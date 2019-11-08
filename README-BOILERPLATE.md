@@ -86,7 +86,8 @@ TODO: document `make cutarelease`, "CHANGES.md", and `make check-version`.
 
 ## joyent/eng.git Makefiles
 
-TODO: document usage and updating (manual) of eng.git Makefiles.
+TODO: document usage and updating of deps/eng (joyent/eng.git) submodule
+Makefiles.
 
 
 ## Testing
