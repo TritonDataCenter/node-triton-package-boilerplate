@@ -9,6 +9,5 @@
 set -o errexit
 set -o pipefail
 
-make fmt
 make check
-#make test-unit
+make test-unit
