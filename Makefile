@@ -63,7 +63,7 @@ cutarelease: check
 	@which json 2>/dev/null 1>/dev/null && \
 	    ver=$(shell json -f package.json version) && \
 	    name=$(shell json -f package.json name) && \
-	    publishedVer=$(shell npm view -j $(shell json -f package.json name)@$(shell json -f package.json version) version 2>/dev/null) && \
+	    publishedVer=$(shell npm view -j $(shell json -f package.json name)@$(shell json -f package.json version) 2>/dev/null | json version) && \
 	    if [[ -n "$$publishedVer" ]]; then \
 		echo "error: $$name@$$ver is already published to npm"; \
 		exit 1; \
@@ -74,7 +74,7 @@ cutarelease: check
 	ver=$(shell cat package.json | json version) && \
 	    date=$(shell date -u "+%Y-%m-%d") && \
 	    git tag -a "v$$ver" -m "version $$ver ($$date)" && \
-	    git push --tags origin && \
+	    git push origin "v$$ver" && \
 	    npm publish
 
 .PHONY: git-hooks
